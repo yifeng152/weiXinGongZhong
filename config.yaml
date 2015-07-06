@@ -1,0 +1,11 @@
+name: yifeng152
+version: 2
+
+name: cron_refresh
+version: 1
+cron:
+- description: cron_test
+  url: /wx_refreashStatus.php
+ #schedule: "*/1 * * * *"
+  schedule: "5 3 * * *"
+ 
