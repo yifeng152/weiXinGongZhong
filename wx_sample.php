@@ -6,6 +6,7 @@ require_once('wx_event.php');
 require_once('wx_text.php');
 require_once('wx_location.php');
 
+
 //define your token
 define("TOKEN", "jgxq");
 //$wechatObj->valid();
