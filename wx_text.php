@@ -161,6 +161,7 @@ function GetTextMessage($postObj)
     global $weatherInfoList, $noteInfoList, $jokeInfoList;  // wx_tpl.php中定义的变量
 
     $fromUsername = $postObj->FromUserName;
+    // $fromUsernameTest = "he";
     $toUsername = $postObj->ToUserName;
     $keyword = trim($postObj->Content);
     $time = time();
@@ -168,7 +169,8 @@ function GetTextMessage($postObj)
 
     $getRequestStatus = GetRequestStatusInDataBase($fromUsername);
     //$contentStr = "linaijun";
-    $contentStr = $getRequestStatus;
+    //$contentStr = $getRequestStatus;
+    //$getRequestStatus = "0";
 
     if ($getRequestStatus == "0")
     {

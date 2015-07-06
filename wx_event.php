@@ -14,8 +14,18 @@ function GetEventMessage($postObj)
 
     if ($customevent == "subscribe")
     {
-        InsertUserIntoDataBase($fromUsername); //将用户信息保存到数据库
-        $contentStr = $promptList;
+        $isNewUserInDataBase = CheckNewUserInDataBase($fromUsername);
+
+        if ($isNewUserInDataBase)   //老用户
+        {
+            UpdateUserIntoDataBase($fromUsername); //更新老用户在数据库中的信息
+            $contentStr = "欢迎您回来!\n".$promptList;
+        }
+        else // 新用户
+        {
+            InsertUserIntoDataBase($fromUsername); //将用户信息保存到数据库
+            $contentStr = $promptList;
+        }
     }
     else
     {
