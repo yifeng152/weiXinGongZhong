@@ -11,6 +11,9 @@ function GetHolidayInfo($keyword)
 
     switch ($keyword)
     {
+        case "1":
+            $contentStr = $schoolInfoList;
+            break;
         case "11":  //校车时刻查询
             $contentStr = $busRouteList;
             break;
@@ -177,8 +180,14 @@ function GetTextMessage($postObj)
         switch ($keyword)
         {
             case "1": //暑期咨询
-                $contentStr = $schoolInfoList;
-                $setRequestStatus = '1';
+            case "11":
+            case "12":
+            case "13":
+            case "14":
+            case "15":
+            $contentStr = GetHolidayInfo($keyword);
+            //$contentStr = $schoolInfoList;
+            $setRequestStatus = '0';
                 break;
             case "2"://机器人聊天
                 $contentStr = $robotInfoList;
