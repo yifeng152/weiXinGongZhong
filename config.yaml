@@ -7,5 +7,5 @@ cron:
 - description: cron_test
   url: /wx_refreashStatus.php
  #schedule: "*/1 * * * *"
-  schedule: "5 3 * * *"
- 
+ # schedule: "5 3 * * *"
+  schedule: "0 */4 * * *" 
