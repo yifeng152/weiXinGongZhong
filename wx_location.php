@@ -29,8 +29,17 @@ function GetLocationMessage($postObj)
             ${"add" . $i . "_obj"} = $apiObj->poiList->point[$i-1]->address;    //地址
             ${"tell" . $i . "_obj"} = $apiObj->poiList->point[$i-1]->telephone;    //电话
             ${"price" . $i . "_obj"} = $apiObj->poiList->point[$i-1]->additionalInfo->price; //价格
+
+            if (${"price" . $i . "_obj"} == "")
+            {
+                ${"price" . $i . "_obj"} = "不详";
+            }
+            else
+            {
+                ${"price" . $i . "_obj"} =  ${"price" . $i . "_obj"}."元";
+            }
             ${"title" . $i . "_str"} = "{${"name".$i."_obj"}}\n地址: {${"add".$i."_obj"}}" .
-                "\n电话: {${"tell".$i."_obj"}}\n人均消费: {${"price".$i."_obj"}}元";
+                "\n电话: {${"tell".$i."_obj"}}\n人均消费: {${"price".$i."_obj"}}";
         }
         $resultStr = sprintf($foodTpl, $fromUsername, $toUsername, $time, ${"title1_str"},
            ${"title2_str"}, ${"title3_str"}, ${"title4_str"}, ${"title5_str"});
