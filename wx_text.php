@@ -156,12 +156,74 @@ function GetJokeInfo()
     $contentStr = json_decode($output, true);
     return $contentStr;
 }
+function GetSuggestionInfo($postObj)
+{
+    $fromUsername = $postObj->FromUserName;
+    $type = $postObj->MsgType;
 
+    $hostname = SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT;
+    $dbuser = SAE_MYSQL_USER;
+    $dbpass = SAE_MYSQL_PASS;
+    $dbname = SAE_MYSQL_DB;
+    $link = mysql_connect($hostname, $dbuser, $dbpass);
+    if (!$link) {
+        die('Could not connect: ' . mysql_error());
+    }
+    mysql_select_db($dbname, $link) or die ('Can\'t use dbname : ' . mysql_error());
+
+    $sql = "SELECT COUNT( * ) FROM  {$dbname}.`SuggestionsManager`";
+    $query = mysql_query($sql);
+    $rs = mysql_fetch_array($query);
+    $userNum = $rs['COUNT( * )'];
+    $latestTime = date('y-m-d H:i:s',time());
+    $content = trim($postObj->Content);
+
+    switch ($type)
+    {
+        case "location":
+            $infoType = "location";
+            $userContent = "no content";
+            break;
+        case "text":
+            $infoType = "text";
+            $userContent = $content;
+            break;
+        case "voice":
+            $infoType = "voice";
+            $userContent = "no content";
+            break;
+        case "video":
+            $infoType = "video";
+            $userContent = "no content";
+            break;
+        case "shortvideo":
+            $infoType = "shortvideo";
+            $userContent = "no content";
+            break;
+        case "image":
+            $infoType = "image";
+            $userContent = "no content";
+            break;
+        case "link":
+            $infoType = "link";
+            $userContent = "no content";
+            break;
+        default:
+            $infoType = "others";
+            $userContent = "no content";
+            break;
+    }
+    $sql = "INSERT INTO {$dbname}.`SuggestionsManager` (`ID`, `Time`, `USER`, `Suggestion`, `InfoType`) ".
+        "VALUES ($userNum + 1, '{$latestTime}', '{$fromUsername}','{$userContent}', '{$infoType}')";
+    mysql_query($sql);
+
+    return "您的意见建议已经记录，感谢您。（输入“#”返回主界面）";
+}
 
 function GetTextMessage($postObj)
 {
     global $textTpl, $promptList, $schoolInfoList, $robotInfoList;
-    global $weatherInfoList, $noteInfoList, $jokeInfoList;  // wx_tpl.php中定义的变量
+    global $weatherInfoList, $noteInfoList, $jokeInfoList,$suggestionInfoList;  // wx_tpl.php中定义的变量
 
     $fromUsername = $postObj->FromUserName;
     // $fromUsernameTest = "he";
@@ -205,6 +267,10 @@ function GetTextMessage($postObj)
                 $contentStr = $jokeInfoList;
                 $setRequestStatus = '5';
                 break;
+            case "6": //意见建议
+                $contentStr = $suggestionInfoList;
+                $setRequestStatus = '6';
+                break;
             default: // 其他情况
                 $setRequestStatus ='0';
                 $contentStr = $promptList;
@@ -235,6 +301,9 @@ function GetTextMessage($postObj)
                     break;
                 case "5": //笑话大全
                     $contentStr = GetJokeInfo();
+                    break;
+                case "6": //笑话大全
+                    $contentStr = GetSuggestionInfo($postObj);
                     break;
                 default:
                     $contentStr = $promptList;

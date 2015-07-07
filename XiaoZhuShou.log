@@ -11,3 +11,7 @@
 在config.yaml中增加Cron功能;
 //每天03点05分启动wx_refreashStatus.php，对于已经结束对话4个小时的用户，将其RequestStatus设置为0
 每4个小时启动wx_refreashStatus.php，对于已经结束对话4个小时的用户，将其RequestStatus设置为0
+
+2015-07-07-12-53 吴奇 增加意见记录功能 V1.4
+在wx_sample.php中增加了主页面中关于意见记录的提示
+在wx_text.php中增加意见记录的函数
