@@ -279,7 +279,7 @@ function GetTextMessage($postObj)
     }
     else
     {
-        if ($keyword == "#")
+        if ($keyword == EXITFLAG)
         {
             $contentStr = $promptList;
             $setRequestStatus = '0';

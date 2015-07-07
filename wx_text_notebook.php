@@ -117,7 +117,7 @@ function ReviewLatestMessage($fromUsername)//回顾以前的信息
         $messageReview = "时间:".date("Y-m-d H:i:s",intval($xmlObj->data[$counter]->time))."\n"."记事本:".$xmlObj->data[$counter]->note."\n".$messageReview;
     }
 
-    $messageReview=$messageReview."\n***********\n现在已进入记事本模式，您输入的内容将会被记录到记事本中\n（仅输入“#”返回主界面;\n仅输入“查看”查看记事本）";
+    $messageReview=$messageReview."\n***********\n现在已进入记事本模式，您输入的内容将会被记录到记事本中\n（仅输入“0”返回主界面;\n仅输入“查看”查看记事本）";
     return $messageReview;
 }
 

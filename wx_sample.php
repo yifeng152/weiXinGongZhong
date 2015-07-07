@@ -9,6 +9,8 @@ require_once('wm_record_content.php');
 
 //define your token
 define("TOKEN", "jgxq");
+define("EXITFLAG","0");
+
 //$wechatObj->valid();
 $wechatObj = new wechatCallbackapiTest();
 $wechatObj->responseMsg();
