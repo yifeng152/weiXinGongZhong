@@ -217,7 +217,7 @@ function GetSuggestionInfo($postObj)
         "VALUES ($userNum + 1, '{$latestTime}', '{$fromUsername}','{$userContent}', '{$infoType}')";
     mysql_query($sql);
 
-    return "您的意见建议已经记录，感谢您。（输入“#”返回主界面）";
+    return "您的意见建议已经记录，感谢您。（输入“0”返回主界面）";
 }
 
 function GetTextMessage($postObj)
