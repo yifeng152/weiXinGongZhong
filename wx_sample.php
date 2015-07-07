@@ -11,9 +11,21 @@ require_once('wm_record_content.php');
 define("TOKEN", "jgxq");
 define("EXITFLAG","0");
 
+
+//sae提供的Counter功能
+try{
+    $c = new SaeCounter();
+}catch(Exception $ex){
+    die($ex->getMessage());
+}
+$c->incr('c1'); 
+
+
+
 //$wechatObj->valid();
 $wechatObj = new wechatCallbackapiTest();
 $wechatObj->responseMsg();
+
 
 class wechatCallbackapiTest
 {
@@ -87,4 +99,3 @@ class wechatCallbackapiTest
     }
 }
 ?>
-
