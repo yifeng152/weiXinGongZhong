@@ -191,7 +191,8 @@ function DeleteMessage($fromUsername,$arr)//回顾以前的信息
     $str4XML = $doc->saveXML();
     UpdateNoteBookInDatabase($str4XML,$user_id);
 
-    return $messageReview;
+    global $tips;
+    return $messageReview."\n***********\n现在已进入记事本模式，您输入的内容将会被记录到记事本中".$tips;
 
 }
 
